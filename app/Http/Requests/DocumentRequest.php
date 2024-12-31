@@ -19,11 +19,11 @@ class DocumentRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules(): array  
     {
         return [
             'name' => 'required|string|max:255', // Tiêu đề tài liệu là bắt buộc, kiểu chuỗi, tối đa 255 ký tự
-            'file_path' => 'required|string|max:255', // Đường dẫn file là bắt buộc, kiểu chuỗi, tối đa 255 ký tự
+            'file_path' => 'required|file|mimes:pdf,doc,docx,xlsx|max:2048', // Đường dẫn file là bắt buộc, kiểu chuỗi, tối đa 255 ký tự
             'type' => 'required|in:PDF,Word,Image,Excel,Presentation', // Loại tài liệu phải thuộc danh sách cho phép
             'user_id' => 'required|exists:users,id', // user_id phải tồn tại trong bảng users
             'project_id' => 'required|exists:projects,id', // project_id phải tồn tại trong bảng projects

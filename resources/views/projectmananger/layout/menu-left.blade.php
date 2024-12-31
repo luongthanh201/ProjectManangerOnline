@@ -6,7 +6,7 @@
     <nav class="sidebar-nav">
         <!-- Track Progress -->
         <a href="{{url('/track_progress_pm')}}" class="nav-item active">
-            <i data-lucide="activity"></i>
+            <i data-lucide="bar-chart-2"></i>
             <span>Theo dõi tiến độ dự án</span>
         </a>
         <!-- Project -->
@@ -36,8 +36,14 @@
         </a>
     </nav>
 
-    <button class="logout-btn">
-        <i data-lucide="log-out"></i>
-        <span>Logout</span>
-    </button>
+    <a href="{{ url('/logout_acc')}}"
+        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <button class="logout-btn">
+            <i data-lucide="log-out"></i>
+            <span>Logout</span>
+        </button>
+    </a>
+    <form id="logout-form" action="{{ url('/logout_acc')}}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </aside>

@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('projectmananger.layout.master')
 @section('content')
 <div id="progressModal" class="modal">
     <div class="modal-content">

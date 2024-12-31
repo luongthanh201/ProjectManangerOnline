@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     use HasFactory;
-    protected $table = 'feedback';
+    protected $table = 'feedbacks';
     protected $fillable = [
         'id_user',
         'id_project',
@@ -17,4 +17,14 @@ class Feedback extends Model
         'priority'
     ];
     public $timestamps = true;
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    // Define relationship with Project (if not defined already)
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'id_project');
+    }
 }

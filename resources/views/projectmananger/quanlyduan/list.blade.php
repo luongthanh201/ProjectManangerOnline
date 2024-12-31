@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{$project->id}}</td>
                     <td>{{$project->name}}</td>
-                    <td>{{$project->description}}</td>
+                    <td>{{ Str::limit($project->description, 100, '...') }}</td>
                     <td>{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}</td>
                     <td>

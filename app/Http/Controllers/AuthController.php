@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -8,11 +8,12 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Log;
 
 class AuthController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the registration form.
      */
     public function index()
     {
@@ -20,7 +21,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the login form.
      */
     public function create()
     {
@@ -28,74 +29,42 @@ class AuthController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Register a new user.
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-
-    }
     public function register(RegisterRequest $request)
     {
-        $data = $request->all();
+        // Validate password
         $request->validate([
             'password' => 'required|confirmed',
         ]);
 
+        // Hash the password and create the user
+        $data = $request->all();
         $data['password'] = bcrypt($data['password']);
 
         User::create($data);
-        return redirect('/login_nguoidung')->with("Đăng ký thành công");
+
+        return redirect('/login_nguoidung')->with("success", "Đăng ký thành công");
     }
 
+    /**
+     * Handle user login.
+     */
     public function login(LoginRequest $request)
     {
-        // Chỉ bao gồm email và password để xác thực
         $login = [
             'email' => $request->email,
             'password' => $request->password
         ];
 
-        // Kiểm tra nếu người dùng chọn "remember me"
-        $remember = $request->has('remember_me'); // Kiểm tra đơn giản
+        $remember = false;
+        if ($request->remember_me) {
+            $remember = true;
+        }
 
-        // Cố gắng xác thực người dùng
         if (Auth::attempt($login, $remember)) {
-            // Kiểm tra vai trò của người dùng sau khi đăng nhập thành công
-            $user = Auth::user(); // Lấy người dùng đã đăng nhập
+            $user = Auth::user();
 
-            // Kiểm tra vai trò và chuyển hướng tương ứng
             if ($user->role === 'project_manager') {
                 return redirect('/track_progress_pm')->with('success', 'Login thành công');
             } elseif ($user->role === 'member') {
@@ -111,4 +80,12 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * Logout the user.
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login_nguoidung');
+    }
 }

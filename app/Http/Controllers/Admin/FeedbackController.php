@@ -38,7 +38,8 @@ class FeedbackController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $feedbacks = Feedback::find($id);
+        return view('admin.quanlyphanhoi.detail', compact('feedbacks'));
     }
 
     /**

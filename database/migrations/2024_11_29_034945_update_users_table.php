@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role', ['admin','project_manager', 'member', 'client'])
                 ->nullable()
-                ->default('client') // Giá trị mặc định
+                ->default('admin') // Giá trị mặc định
                 ->change();
         });
     }

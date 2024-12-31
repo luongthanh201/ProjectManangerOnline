@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>LARAVEL</title>
-    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+    <title>ADMIN</title>
+    <link rel="stylesheet" href="{{asset('css/styles.css')}} ?v={{ time() }}">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 

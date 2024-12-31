@@ -51,32 +51,31 @@
     @foreach ($feedbacks as $fb)
         <div class="feedback-card" id="{{$fb->id}}">
             <div class="feedback-header">
-                <h3 class="feedback-title">{{$fb->projects()->name}}</h3>
+                <h3 class="feedback-title">{{$fb->project->name ?? 'Unknown Project' }}</h3>
             </div>
             <div class="feedback-meta">
-                @if ($fb->status == 'in-progress')
-                    <span class="feedback-badge badge-in-progress">in-progress</span>
-                @elseif ($fb->status == 'resolved')
-                    <span class="feedback-badge badge-resolved">resolved</span>
-                @else
-                    <span class="feedback-badge badge-pending">pending</span>
-                @endif
-
                 @if ($fb->priority == 'High')
-                    <span class="feedback-badge badge-High">High</span>
+                    <span class="feedback-badge badge-high">High</span>
                 @elseif ($fb->priority == 'Medium')
-                    <span class="feedback-badge badge-Medium">Medium</span>
+                    <span class="feedback-badge badge-medium">Medium</span>
                 @else
-                    <span class="feedback-badge badge-Low">Low</span>
+                    <span class="feedback-badge badge-low">Low</span>
                 @endif
-
             </div>
-            <p class="feedback-content">{{$fb->content}}</p>
+            <p class="feedback-content short-content">
+                {{ Str::limit($fb->content, 100, '...') }} {{-- Hiển thị 100 ký tự đầu --}}
+            </p>
+            <p class="feedback-content full-content" style="display: none;">
+                {{$fb->content}} {{-- Nội dung đầy đủ --}}
+            </p>
             <div class="feedback-footer">
-                <span>{{$fb->users()->name}}</span>
-                <span> <span>{{ \Carbon\Carbon::parse($fb->start_date)->format('d/m/Y') }}
-                        - {{ \Carbon\Carbon::parse($fb->end_date)->format('d/m/Y') }}</span>
-                <a href="{{url('/feedback_detail/' .$fb->id)}}"></a>
+                <span>{{ $fb->user->name ?? 'Unknown User' }}</span>
+                <span>{{ \Carbon\Carbon::parse($fb->created_at)->format('d/m/Y') }}</span>
+                <a href="{{url('/detail_feedback/'.$fb->id)}}"">
+                    <button class="toggle-detail-btn">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </a>
             </div>
         </div>
     @endforeach

@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('projectmananger.layout.master')
 @section('content')
 <div id="progressModal" class="modal">
     <div class="modal-content">
@@ -51,7 +51,7 @@
             <div class="form-group">
                 <label for="task-status">Status:</label>
                 <select id="task-status" name="status">
-                    <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>In-progress</option>
+                    <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
                     <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
                 </select>

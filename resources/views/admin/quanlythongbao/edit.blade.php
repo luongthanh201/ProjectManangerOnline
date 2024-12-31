@@ -45,6 +45,10 @@
                 <input type="text" id="id_user" name="id_user" value="{{$notify->user->name ?? 'Unknown User' }}">
             </div>
             <div class="form-group">
+                <label for="uploaded_at">Create date:</label>
+                <input type="date" id="date_received" name="date_received">
+            </div>
+            <div class="form-group">
                 <label for="notificationStatus">Status</label>
                 <select id="notificationStatus" name="status" value="{{$notify->status}}">
                     <option value="received">Received</option>

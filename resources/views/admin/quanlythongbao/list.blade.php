@@ -32,7 +32,7 @@
             <tr>
                     <td>{{$notify->id}}</td>
                     <td>{{$notify->name}}</td>
-                    <td>{{$notify->content}}</td>
+                    <td>{{Str::limit($notify->content, 100, '...')}}</td>
                     <td>{{$notify->user->name ?? 'Unknown User' }}</td>
                     <td>
                         @if($notify->status == 'not-received')
@@ -48,7 +48,7 @@
                                     <i data-lucide="pencil"></i>
                                 </button>
                             </a>
-                            <a href="{{url('/delete_cate/' . $notify->id)}}">
+                            <a href="{{url('/delete_notify/' . $notify->id)}}">
                                 <button class="delete-btn">
                                     <i data-lucide="trash-2"></i>
                                 </button>

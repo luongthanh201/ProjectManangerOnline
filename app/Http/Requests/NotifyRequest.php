@@ -23,7 +23,7 @@ class NotifyRequest extends FormRequest
     {
         return [
             'name' => 'required|max:191',
-            'content' => 'required|min:10|max:191',
+            'content' => 'required|min:10|max:2000',
             'status' => 'required|in:received,not-received'
         ];
     }

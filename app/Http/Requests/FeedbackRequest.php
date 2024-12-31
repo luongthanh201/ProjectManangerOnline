@@ -20,8 +20,8 @@ class FeedbackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|min:10|max:191',
-            'status' => 'required|in:pending,resolved,in-progress',
+            'name' => 'required|max:50',
+            'content' => 'required|max:1000',
             'priority' => 'required|in:High,Medium,Low',
         ];
     }
@@ -32,11 +32,10 @@ class FeedbackRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'Nội dung không được để trống.',
+            'name.max' => 'Nội dung không được vượt quá :max ký tự.',
             'content.required' => 'Nội dung không được để trống.',
-            'content.min' => 'Nội dung phải có ít nhất :min ký tự.',
             'content.max' => 'Nội dung không được vượt quá :max ký tự.',
-            'status.required' => 'Trạng thái không được để trống.',
-            'status.in' => 'Trạng thái không hợp lệ. Chỉ được chọn pending, resolved, hoặc in-progress.',
             'priority.required' => 'Độ ưu tiên không được để trống.',
             'priority.in' => 'Độ ưu tiên không hợp lệ. Chỉ được chọn High, Medium, hoặc Low.',
         ];

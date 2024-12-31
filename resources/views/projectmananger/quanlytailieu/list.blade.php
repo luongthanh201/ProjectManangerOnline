@@ -1,7 +1,7 @@
 @extends('projectmananger.layout.master')
 @section('content')
 <div class="header">
-    <h1>Project</h1>
+    <h1>Document</h1>
 </div>
 <div class="search-bar">
     <i data-lucide="search"></i>
@@ -14,10 +14,10 @@
                 <th>#</th>
                 <th>Title</th>
                 <th>File Path</th>
-                <th>Status</th>
                 <th>Uploaded By</th>
-                <th>Project</th>
+                <th>Project</th>       
                 <th>Uploaded At</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
                 <tr>
                     <td>{{$document->id}}</td>
                     <td>{{$document->name}}</td>
-                    <td>{{$document->file_path}}</td>
+                    <td>{{ preg_replace('/^\d+_/', '', basename($document->file_path)) }}</td>
                     <td>{{$document->user->name ?? 'Unknown User'}}</td>
                     <td>{{$document->project->name ?? 'Unknown Project'}}</td>
                     <td>{{\Carbon\Carbon::parse($document->Uploaded_at)->format('d/m/Y')}}</td>

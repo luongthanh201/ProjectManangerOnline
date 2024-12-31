@@ -13,6 +13,7 @@ class Notify extends Model
         'name',
         'content',
         'id_user',
+        'date_received',
         'status'
     ];
     public $timestamps = true;

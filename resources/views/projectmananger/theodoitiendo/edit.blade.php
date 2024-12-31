@@ -1,10 +1,10 @@
-@extends('admin.layout.master')
+@extends('projectmananger.layout.master')
 @section('content')
 <div id="progressModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2 id="modalTitle">Update Project Progress</h2>
-            <a href="{{url('/track_progress')}}">
+            <a href="{{url('/track_progress_pm')}}">
                 <button class="close-btn">
                     <i data-lucide="x"></i>
                 </button>

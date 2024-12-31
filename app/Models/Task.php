@@ -13,7 +13,8 @@ class Task extends Model
         'name',
         'id_user',
         'deadline',
-        'status'
+        'status',
+        'priority'
     ];
     public $timestamps = true;
     public function user()
